@@ -1,0 +1,8 @@
+Hi <%= @outing.diner.first_name %>,
+
+The Diners Club outing you are sponsoring to <%= @outing.restaurant_name %> has been modified.
+
+<%= @diff %>
+For more details about the outing, please visit <%= @host %><%= url_for :controller => 'outing', :action => 'show', :id => @outing.id %>
+
+Thanks.

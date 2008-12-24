@@ -1,0 +1,11 @@
+Hi <%= @diner.first_name %>,
+
+You have not responded to the following scheduled Diners Club outings:
+
+<% for outing in @outings -%>
+<%= outing.restaurant_name %> on <%= outing.reservation_time.strftime("%B %d, %Y %I:%M%p") %> - <%= @host %><%= url_for :controller => 'outing', :action => 'show', :id => outing.id %>
+<% end -%>
+
+As soon as you know, please indicate if you will or will not be attending these outings by clicking the above links, editing the outing, and checking the appropriate box next to your name.  Once you have indicated this, the annoying spam will stop :)
+
+Thanks.

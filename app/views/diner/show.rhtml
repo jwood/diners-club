@@ -1,0 +1,38 @@
+<h2><%= h(@diner.display_name) %></h2>
+
+<% unless @diner.address_line_1.blank? -%>
+  <p><strong>Address</strong></p>
+  <div class="detailed_info">
+    <%= h(@diner.address_line_1) %> <br />
+    <%= h(@diner.address_line_2) + "<br />" unless @diner.address_line_2.blank? %>
+    <%= h(@diner.city) %>, <%= h(@diner.state) %> <%= h(@diner.zip) %> <br />
+  </div>
+  <br />
+<% end -%>
+
+<% unless @diner.email.blank? -%>
+  <p><strong>Contact Info</strong></p>
+  <div class="detailed_info">
+    <%= '<strong>Email:</strong> ' + h(@diner.email) %>
+  </div>
+  <br />
+<% end -%>
+
+<% unless @diner.food_preferences.blank? -%>
+  <p><strong>Food Preferences</strong></p>
+  <div class="detailed_info">
+    <%= h(@diner.food_preferences) %>
+  </div>
+  <br />
+<% end -%>
+
+<% unless @diner.email.blank? -%>
+  <p><strong>Email Preferences</strong></p>
+  <div class="detailed_info">
+    <%= '<strong>Send Email on Change of Sponsored Outing:</strong> ' + h(@diner.send_email_on_outing_change) %>
+  </div>
+  <br />
+<% end -%>
+
+<%= link_to 'Edit', :action => 'edit', :id => @diner %> |
+<%= link_to 'Back', :action => 'index' %>

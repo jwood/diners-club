@@ -1,0 +1,12 @@
+Diners Club ChangeLog
+http://johnpwood.net/projects/webapps/diners-club/
+
+Version 1.3 - 2008-12-24
+------------------------
+ * Added support for HTTP authorization via an htpasswd file specified by
+   htpasswd_file in the config files.
+ * Moved application specific config to AppConfig class
+
+Version 1.2 - 2008-10-14
+------------------------
+ * Initial release

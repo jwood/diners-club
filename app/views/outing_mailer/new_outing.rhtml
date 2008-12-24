@@ -1,0 +1,13 @@
+Hi,
+
+A new Diners Club outing has been scheduled.
+
+Sponsor: <%= @outing.diner.first_name %> <%= @outing.diner.last_name %>
+Date/Time: <%= @outing.reservation_time.strftime("%B %d, %Y %I:%M%p") %> 
+Restaurant Name: <%= @outing.restaurant_name %> 
+Restaurant Location: <%= @outing.restaurant_city %>, <%= @outing.restaurant_state %>
+Restaurant Description: <%= @outing.restaurant_description %>
+
+For more details about the outing, or to sign up, please visit <%= @host %><%= url_for :controller => 'outing', :action => 'show', :id => @outing.id %>
+
+Thanks.

@@ -1,0 +1,51 @@
+require 'singleton'
+
+#------------------------------------------------------------------------------#
+# This class defines application specific configuration
+#------------------------------------------------------------------------------#
+class AppConfig
+  include Singleton
+
+  #----------------------------------------------------------------------------#
+  # The website administrator's email address
+  #----------------------------------------------------------------------------#
+  attr_reader :admin_email
+
+  #----------------------------------------------------------------------------#
+  # The hostname (and port) the application is running on 
+  #----------------------------------------------------------------------------#
+  attr_reader :hostname
+
+  #----------------------------------------------------------------------------#
+  # The SMTP settings used by the application for sending email
+  #----------------------------------------------------------------------------#
+  attr_reader :smtp_settings
+
+  #----------------------------------------------------------------------------#
+  # Specifies the password file used to access the application.
+  #----------------------------------------------------------------------------#
+  attr_accessor :htpasswd_file
+
+  #----------------------------------------------------------------------------#
+  # Initialize the configuration
+  #----------------------------------------------------------------------------#
+  def initialize
+    if RAILS_ENV == 'production'
+      @htpasswd_file = '/path/to/password_file' 
+    end
+
+    @admin_email = 'your.email@mailhost.com'
+    @hostname = 'http://application.url.com:3000'
+
+    @smtp_settings = {
+      :address => "mail.server.name" ,
+      :port => 25,
+      :domain => "domain.name" ,
+      :authentication => :login,
+      :user_name => "username" ,
+      :password => "password"
+    }
+  end
+
+end
+

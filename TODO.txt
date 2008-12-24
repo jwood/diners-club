@@ -1,0 +1,2 @@
+- Prevent editing of past outings (in controller)
+- Add a reviews section, where people can review resturants.

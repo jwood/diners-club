@@ -1,0 +1,10 @@
+<h2>Diners</h2>
+
+<ul>
+<% for diner in @diners -%>
+  <li><%= link_to((h(diner.comma_seperated_display_name)), :action => 'show', :id => diner) %></li>
+<% end -%>
+</ul>
+<br />
+
+<%= link_to 'New diner', :action => 'edit' %>

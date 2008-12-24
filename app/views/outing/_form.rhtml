@@ -1,0 +1,108 @@
+<%= error_messages_for 'outing' %>
+
+<p><strong>Outing Information</strong>
+<%= create_tooltip("outing_info_header", "Enter the outing reservation time and outing sponsor. <br/> Sponsor should be left blank when simply suggesting an outing.") %></p>
+<div class="detailed_info">
+  <p>
+    <label for="outing_reservation_time">Reservation Date/Time</label><br/>
+    <%= generate_reservation_time_select(@outing) %>
+  </p>
+
+  <p>
+    <label for="outing_diner">Sponsor</label> <strong>(Leave blank if suggesting an outing)</strong><br/>
+    <%= generate_sponsor_dropdown(@diners) %>
+  </p>
+</div>
+<br />
+
+<p><strong>Restaurant Information</strong>
+<%= create_tooltip("restaurant_info_header", "Enter all available restaurant information") %></p>
+<div class="restaurant_info">
+  <table>
+    <tr>
+      <td>
+        <p><label for="outing_restaurant_name">Restaurant Name</label><br/>
+        <%= text_field 'outing', 'restaurant_name'  %></p>
+
+        <p><label for="outing_restaurant_description">Description</label><br/>
+        <%= text_area 'outing', 'restaurant_description', 'cols' => 40, 'rows' => 16  %></p>
+      </td>
+      <td>
+        <p><label for="outing_restaurant_address_line_1">Address Line 1</label><br/>
+        <%= text_field 'outing', 'restaurant_address_line_1'  %></p>
+
+        <p><label for="outing_restaurant_address_line_2">Address Line 2</label><br/>
+        <%= text_field 'outing', 'restaurant_address_line_2'  %></p>
+
+        <p><label for="outing_restaurant_city">City</label><br/>
+        <%= text_field 'outing', 'restaurant_city', 'size' => 15 %></p>
+
+        <p><label for="outing_restaurant_state">State</label><br/>
+        <%= text_field 'outing', 'restaurant_state', 'size' => 2  %></p>
+
+        <p><label for="outing_restaurant_zip">Zip</label><br/>
+        <%= text_field 'outing', 'restaurant_zip', 'size' => 5  %></p>
+        
+        <p><label for="outing_restaurant_phone">Phone Number</label><br/>
+        <%= text_field 'outing', 'restaurant_phone'  %></p>
+
+        <p><label for="outing_restaurant_website">Website</label><br/>
+        http://<%= text_field 'outing', 'restaurant_website'  %></p>
+      </td>
+    </tr>
+  </table>
+</div>
+<br />
+
+<p><strong>Afterparty Information</strong>
+<%= create_tooltip("afterparty_info_header", "Enter the location of the afterparty for drinks.") %></p>
+<div class="restaurant_info">
+  <table>
+    <tr>
+      <% unless @diners.blank? -%>
+      <td>
+        <% checked = true unless @outing.afterparty_sponsor.blank? -%>
+        <p><%= radio_button_tag 'afterparty', 'diners_house', checked %>Diner's House</p>
+        <%= generate_afterparty_sponsor_dropdown(@outing.afterparty_sponsor, @diners) %>
+      </td>
+      <% end -%>
+      <td>
+        <% 
+          checked = false 
+          checked = true unless @outing.afterparty_bar_name.blank?
+        -%>
+        <p>
+          <%= radio_button_tag 'afterparty', 'bar', checked %>Bar<br />
+
+          <p><label for="outing_afterparty_bar_name">Bar Name</label><br/>
+          <%= text_field 'outing', 'afterparty_bar_name'  %></p>
+
+          <p><label for="outing_afterparty_address_line_1">Address Line 1</label><br/>
+          <%= text_field 'outing', 'afterparty_address_line_1'  %></p>
+
+          <p><label for="outing_afterparty_address_line_2">Address Line 2</label><br/>
+          <%= text_field 'outing', 'afterparty_address_line_2'  %></p>
+
+          <p><label for="outing_afterparty_city">City</label><br/>
+          <%= text_field 'outing', 'afterparty_city', 'size' => 15 %></p>
+
+          <p><label for="outing_afterparty_state">State</label><br/>
+          <%= text_field 'outing', 'afterparty_state', 'size' => 2  %></p>
+
+          <p><label for="outing_afterparty_zip">Zip</label><br/>
+          <%= text_field 'outing', 'afterparty_zip', 'size' => 5  %></p>
+        </p>
+      </td>
+      <td>
+        <% 
+          checked = false 
+          checked = true if @outing.afterparty_bar_name.blank? && @outing.afterparty_sponsor.blank?
+        -%>
+        <p><%= radio_button_tag 'afterparty', 'none', checked %>No Afterparty</p>
+      </td>
+    </tr>
+  </table>
+</div>
+<br />
+
+<%= generate_diner_checkboxes(@diners, @outing.diners, @outing.declined_diners) unless @diners.blank? %>

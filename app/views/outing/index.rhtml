@@ -1,0 +1,27 @@
+<h2>Upcoming Outings</h2>
+<%= generate_outings_table(@upcoming_outings) %>
+
+<h2>
+  <%= 
+    link_to_function "Suggested Outings", 
+      visual_effect(:toggle_blind, :suggested_outings_list), 
+      :style => "color: #B32400;"
+  %>
+</h2>
+<div id="suggested_outings_list" style="display: none;">
+  <%= generate_outings_table(@suggested_outings, true) %>
+</div>
+
+<h2>
+  <%= 
+    link_to_function "Past Outings", 
+      visual_effect(:toggle_blind, :past_outings_list), 
+      :style => "color: #B32400;"
+  %>
+</h2>
+<div id="past_outings_list" style="display: none;">
+  <%= generate_outings_table(@past_outings) %>
+</div>
+<br />
+
+<%= link_to 'New outing', :action => 'edit' %>

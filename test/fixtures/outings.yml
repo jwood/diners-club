@@ -1,0 +1,61 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+bobs_beef_shack:
+  id: 1
+  reservation_time: <%= DateTime.new(2020, 05, 01, 17, 00) %>
+  restaurant_name: Bob's Beef Shack
+  restaurant_address_line_1: 333 South Ave.
+  restaurant_address_line_2: Unit 100
+  restaurant_city: Chicago
+  restaurant_state: IL
+  restaurant_zip: 60606
+  restaurant_phone: 312-555-3422
+  restaurant_description: Beef, and lots of it
+  restaurant_website: http://www.bobsbeefshack.com
+  afterparty_bar_name: O'Mallys
+  afterparty_address_line_1: 456 North St.
+  afterparty_city: Chicago
+  afterparty_state: IL
+  afterparty_zip: 60606
+  diner_id: 1
+
+joes_italian:
+  id: 2
+  reservation_time: <%= DateTime.new(2020, 06, 01, 17, 00) %>
+  restaurant_name: Joe's Italian
+  restaurant_address_line_1: 743 Maple Rd.
+  restaurant_city: Chicago
+  restaurant_state: IL
+  restaurant_zip: 60606
+  restaurant_phone: 312-555-3433
+  restaurant_description: Pasta, pizza, and more
+  restaurant_website: http://www.joesitalian.com
+  afterparty_sponsor_id: 2
+  diner_id: 2
+
+some_suggested_outing:
+  id: 3
+  reservation_time: 
+  restaurant_name: TGI Fridays
+  restaurant_address_line_1: 666 Crappy Lane
+  restaurant_address_line_2: 
+  restaurant_city: Chicago
+  restaurant_state: IL
+  restaurant_zip: 60606
+  restaurant_phone: 
+  restaurant_description: Crappy food
+  restaurant_website: 
+
+some_past_outing:
+  id: 4
+  reservation_time: <%= DateTime.new(2000, 06, 01, 17, 00) %>
+  restaurant_name: Joe's Crab Shack
+  restaurant_address_line_1: 17638 Oak Ave
+  restaurant_address_line_2: 
+  restaurant_city: Chicago
+  restaurant_state: IL
+  restaurant_zip: 60606
+  restaurant_phone: 
+  restaurant_description: Seafood
+  restaurant_website: 
+  diner_id: 1
+  

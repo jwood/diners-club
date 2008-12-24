@@ -1,0 +1,146 @@
+body {
+    background-color: #FF3300;
+    color: black;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 0.8em;
+}
+
+#header {
+    background-color: #B32400;
+    color: white;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center;
+    border: 2px solid black;
+}
+
+#header h1 {
+    font-size: 2.0em;
+}
+
+#header a {
+    color: white;
+    text-decoration: none;
+}
+
+#navigation {
+    margin-bottom: 15px;
+    padding-top: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    text-align: center;
+    background: #FFFFFF;
+}
+
+#content {
+    background: #FFFFFF;
+    border: 2px solid black;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+#content h1, h2, h3, h4 {
+    color: #B32400;
+}
+
+#content h2 {
+    font-size: 1.5em;
+}
+
+.detailed_info, .restaurant_info {
+    padding: 10px;
+    border: 1px solid black;
+    background-color: #ffe9e9;
+}
+
+.restaurant_info td {
+    padding-right: 25px;
+    vertical-align: top;
+}
+
+.outing_table {
+    text-align: center;
+}
+
+.outing_table table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
+
+.map_links form {
+  padding: 0px;
+  margin: 0px;
+}
+
+td {
+    padding: 5px;
+}
+
+a:link {
+    color: #0000FF;
+}
+
+a:visited {
+    color: #3366FF;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+.tooltip_icon {
+  background: red;
+  color: #FFFFFF;
+  font-weight: bold;
+  border: 1px solid black;
+  padding: 2px 4px;
+}
+
+.diners_list_table {
+  width: 100%;
+}
+
+.diners_list_table td {
+  vertical-align: top;
+}

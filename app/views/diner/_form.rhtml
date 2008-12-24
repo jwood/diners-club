@@ -1,0 +1,56 @@
+<%= error_messages_for 'diner' %>
+
+<p><strong>Name</strong>
+<%= create_tooltip("name_header", "Enter you name here") %></p>
+<div class="detailed_info">
+  <p><label for="diner_first_name">First name</label><br/>
+  <%= text_field 'diner', 'first_name'  %></p>
+
+  <p><label for="diner_last_name">Last name</label><br/>
+  <%= text_field 'diner', 'last_name'  %></p>
+</div>
+<br />
+
+<p><strong>Address</strong>
+<%= create_tooltip("address_header", "Entering your address will allow this tool to give<br/>you maps to the outing and afterparty locations") %></p>
+<div class="detailed_info">
+  <p><label for="diner_address_line_1">Address Line 1</label><br/>
+  <%= text_field 'diner', 'address_line_1'  %></p>
+
+  <p><label for="diner_address_line_2">Address Line 2</label><br/>
+  <%= text_field 'diner', 'address_line_2'  %></p>
+
+  <p><label for="diner_city">City</label><br/>
+  <%= text_field 'diner', 'city'  %></p>
+
+  <p><label for="diner_state">State</label><br/>
+  <%= text_field 'diner', 'state'  %></p>
+
+  <p><label for="diner_zip">Zip</label><br/>
+  <%= text_field 'diner', 'zip'  %></p>
+</div>
+<br />
+
+<p><strong>Contact Info</strong>
+<%= create_tooltip("contact_header", "Entering your email address will allow this tool to <br/> email you about upcoming outings") %></p>
+<div class="detailed_info">
+  <p><label for="diner_email">Email</label><br/>
+  <%= text_field 'diner', 'email'  %></p>
+</div>
+<br/>
+
+<p><strong>Food Preferences</strong>
+<%= create_tooltip("preferences_header", "Enter your food likes/dislikes so the outing planner <br/> can take them into account when selecting a restaurant") %></p>
+<div class="detailed_info">
+  <p><label for="diner_food_preferences">Food Preferences</label><br/>
+  <%= text_area 'diner', 'food_preferences', 'cols' => 40, 'rows' => 20  %></p>
+</div>
+<br/>
+
+<p><strong>Email Preferences</strong>
+<%= create_tooltip("email_preferences_header", "Enter your email preferences for this website") %></p>
+<div class="detailed_info">
+  <p><label for="diner_send_email_on_outing_change">Send Email on Change of Sponsored Outing: </label>
+  <%= check_box 'diner', 'send_email_on_outing_change' %></p>
+</div>
+<br/>

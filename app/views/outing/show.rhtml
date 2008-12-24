@@ -1,0 +1,98 @@
+<p style="color:green"><%= flash[:notice] %></p>
+
+<h2>Outing to <%= h(@outing.restaurant_name) %></h2>
+
+<% unless @outing.diner.nil? -%>
+  <p><strong>Outing Information</strong></p>
+  <div class="detailed_info">
+    <%= "<strong>Reservation Date/Time:</strong> " + h(format_time(@outing.reservation_time)) %><br />
+    <%= ("<strong>Sponsor:</strong> " + h(@outing.diner.display_name)) %>
+    <% if @outing.reservation_time >= Time.now -%>
+      <br /><br />
+      <%= link_to 'Send outing announcement email', 
+        { :action => 'send_new_outing_email', :id => @outing },
+        :confirm => 'Are you sure you would like to send an announcement email for this outing to all diners?',
+        :method => :post
+      %>
+    <% end -%>
+  </div>
+  <br />
+<% end -%>
+
+<p><strong>Restaurant Address</strong></p>
+<div class="detailed_info">
+  <%= h(@outing.restaurant_address_line_1) %> <br />
+  <%= h(@outing.restaurant_address_line_2) + "<br />" unless @outing.restaurant_address_line_2.blank? %>
+  <%= h(@outing.restaurant_city) %>, <%= h(@outing.restaurant_state) %> <%= h(@outing.restaurant_zip) %> <br />
+  <br />
+  <div class="map_links">
+    <%= link_to 'Map', { :action => :get_map_to_restaurant, :id => @outing }, :target => 'new' %> | 
+    <%= generate_diner_directions_section(@outing, @diners) unless @diners.blank? %>
+  </div>
+</div>
+<br />
+
+<% unless @outing.restaurant_description.blank? -%>
+  <p><strong>Restaurant Description</strong></p>
+  <div class="detailed_info">
+    <%= h(@outing.restaurant_description) %>
+  </div>    
+  <br />
+<% end -%>
+
+<% if !@outing.restaurant_phone.blank? || !@outing.restaurant_website.blank? -%>
+  <p><strong>Restaurant Contact Information</strong></p>
+  <div class="detailed_info">
+    <%= ("<strong>Phone:</strong> " + h(@outing.restaurant_phone) + "<br />") unless @outing.restaurant_phone.blank? %>
+    <%= ("<strong>Website:</strong> " + linkify(h(@outing.restaurant_website)) + "<br />") unless @outing.restaurant_website.blank? %>
+  </div>
+  <br />
+<% end -%>
+
+<% unless @outing.afterparty_location.nil? -%>
+  <p><strong>Afterparty</strong></p>
+  <div class="detailed_info">
+    <%= display_afterparty_address(@outing) %>
+    <br />
+    <div class="map_links">
+      <%= link_to 'Map', { :action => :get_map_to_afterparty, :id => @outing }, :target => 'new' %> | 
+      <%= link_to 'Directions to afterparty', { :action => :get_directions_to_afterparty, :id => @outing }, :target => 'new' %>
+    </div>
+  </div>
+  <br />
+<% end -%>
+
+<table class="diners_list_table">
+  <tr>
+    <% unless @outing.diners.blank? -%>
+    <td>
+      <p><strong>Who's In?</strong></p>
+      <div class="detailed_info">
+        <%= generate_diners_list(@outing.diners) %>
+      </div>    
+    </td>
+    <% end -%>
+    <% unless @outing.declined_diners.blank? -%>
+    <td>
+      <p><strong>Who's Out?</strong></p>
+      <div class="detailed_info">
+        <%= generate_diners_list(@outing.declined_diners) %>
+      </div>    
+    </td>
+    <% end -%>
+    <% unless @outing.unresponsive_diners.blank? -%>
+    <td>
+      <p><strong>Who Hasn't Replied?</strong></p>
+      <div class="detailed_info">
+        <%= generate_diners_list(@outing.unresponsive_diners) %>
+      </div>    
+    </td>
+    <% end -%>
+  </tr>
+</table>
+<br />
+
+<% if @outing.diner.nil? || @outing.reservation_time >= Time.now -%>
+  <%= link_to 'Edit', :action => 'edit', :id => @outing %> |
+<% end -%>
+<%= link_to 'Back', :action => 'index' %>

@@ -1,0 +1,19 @@
+Hi everybody,
+
+This is a friendly reminder of the upcoming Diners Club outing to <%= @outing.restaurant_name %> on <%= @outing.reservation_time.strftime("%B %d, %Y %I:%M%p") %>.
+
+<%= @outing.restaurant_name %> is located at:
+<%= @outing.restaurant_address %>
+
+You have already signed up for this outing.
+
+<% if (!@outing.afterparty_sponsor.blank?) -%>
+The afterparty will be at the home of <%= @outing.afterparty_sponsor.display_name %>.
+
+<% elsif (!@outing.afterparty_bar_name.blank?) -%>
+The afterparty will be at <%= @outing.afterparty_bar_name %> in <%= @outing.afterparty_city %>, <%= @outing.afterparty_state %>.
+
+<% end -%>
+Visit <%= @host %><%= url_for :controller => 'outing', :action => 'show', :id => @outing.id %> for more details about this outing.
+
+See you soon!

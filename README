@@ -1,0 +1,28 @@
+= About
+
+This is the Diners Club web appliation.  Diners Club can be used to coordinate
+dinner outings with your friends.  It will manage the outing details, give 
+your friends a place to mark if they are coming or not, and nag them (via email)
+to respond to the outing request.
+
+More information, including a full list of features and screenshots, can be 
+found at http://johnpwood.net/projects/webapps/diners-club/
+
+
+= Setup
+* Install rails (version 2.2 or higher)
+* Copy config/database.yml.template to config/database.yml and configure your
+database connections
+* Copy config/app_config.rb.template to config/app_config.rb and setup
+your preferences
+* Run "rake db:migrate" to setup your database
+
+
+= LICENSE
+MIT License.  See LICENCE for details.
+
+
+= AUTHOR
+Diners Club was written by John Wood.  John can be reached at 
+john_p_wood@yahoo.com.
+

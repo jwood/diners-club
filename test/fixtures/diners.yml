@@ -1,0 +1,40 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+john:
+  id: 1
+  first_name: John
+  last_name: Wood
+  email: john_wood@yahoo.com
+  address_line_1: 123 Main St.
+  address_line_2: Apt 104
+  city: Chicago
+  state: IL
+  zip: 60606
+  food_preferences: Good food
+  send_email_on_outing_change: true
+
+beth:
+  id: 2
+  first_name: Beth
+  last_name: Wood
+  email: beth_wood@yahoo.com
+  address_line_1: 123 Main St.
+  address_line_2: Apt 104
+  city: Chicago
+  state: IL
+  zip: 60606
+  food_preferences: Great food
+  send_email_on_outing_change: true
+
+bob:
+  id: 3
+  first_name: Bob
+  last_name: Smith
+  email: bob_smith@yahoo.com
+  address_line_1: 
+  address_line_2: 
+  city: 
+  state:
+  zip: 
+  food_preferences: 
+  send_email_on_outing_change: true
+  
