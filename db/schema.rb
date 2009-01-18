@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(:version => 6) do
     t.integer "diner_id"
   end
 
-  add_index "declined_outings", ["outing_id"], :name => "fk_declined_outing"
   add_index "declined_outings", ["diner_id"], :name => "fk_declined_diner"
+  add_index "declined_outings", ["outing_id"], :name => "fk_declined_outing"
 
   create_table "diners", :force => true do |t|
     t.string  "first_name",                                    :null => false
@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(:version => 6) do
     t.integer "diner_id"
   end
 
-  add_index "diners_outings", ["outing_id"], :name => "fk_outing"
   add_index "diners_outings", ["diner_id"], :name => "fk_diner"
+  add_index "diners_outings", ["outing_id"], :name => "fk_outing"
 
   create_table "outings", :force => true do |t|
     t.datetime "reservation_time"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(:version => 6) do
     t.integer  "afterparty_sponsor_id"
   end
 
-  add_index "outings", ["diner_id"], :name => "fk_sponsor"
   add_index "outings", ["afterparty_sponsor_id"], :name => "fk_afterparty_sponsor_id"
+  add_index "outings", ["diner_id"], :name => "fk_sponsor"
 
 end
