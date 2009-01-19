@@ -46,10 +46,10 @@ namespace "dinersclub" do
     body = File.read(message_file)
 
     to_address = []
-    diners.collect {|d| d.email unless d.email.blank? }.each { |e| to_address << e }
+    diners.collect { |d| d.email unless d.email.blank? }.each { |e| to_address << e }
 
     message =  "From: #{from_address} <#{from_address}>\n"
-    message << "To: #{to_address}\n"
+    message << "To: #{to_address.join(', ')}\n"
     message << "Subject: #{subject}\n\n"
     message << body
 
