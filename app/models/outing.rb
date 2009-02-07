@@ -55,6 +55,11 @@ class Outing < ActiveRecord::Base
       self.reservation_time = self.reservation_time.advance(:days => 7)
     end 
 
+    # Hack to make the 2/2009 outing the 3rd Saturday of the month
+    if !self.reservation_time.nil? && self.reservation_time.month == 2 && self.reservation_time.year == 2009
+      self.reservation_time = self.reservation_time.advance(:days => 7)
+    end 
+
     super
   end
 
