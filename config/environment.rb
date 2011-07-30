@@ -44,6 +44,7 @@ Rails::Initializer.run do |config|
   # config.active_record.default_timezone = :utc
  
   # See Rails::Configuration for more options
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :enable_starttls_auto => AppConfig.instance.smtp_settings[:enable_starttls_auto],
