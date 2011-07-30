@@ -1,17 +1,10 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'diner_controller'
 
-# Re-raise errors caught by the controller.
-class DinerController; def rescue_action(e) raise e end; end
-
-class DinerControllerTest < Test::Unit::TestCase
+class DinerControllerTest < ActionController::TestCase
   fixtures :diners
 
   def setup
-    @controller = DinerController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
-
     @john_id = diners(:john).id
   end
 
@@ -58,7 +51,7 @@ class DinerControllerTest < Test::Unit::TestCase
     diner = diners(:john)
     diner.city = 'New York'
     post :edit, { :id => diner.id, :diner => diner.attributes }
-    assert_redirected_to :action => 'show'
+    assert_redirected_to :action => 'show', :id => diner
     
     get :edit, :id => @john_id
     assert_response :success

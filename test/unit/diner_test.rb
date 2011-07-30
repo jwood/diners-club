@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class DinerTest < Test::Unit::TestCase
-  fixtures :diners
+class DinerTest < ActiveSupport::TestCase
   
   def setup
     @diner = Diner.find(1)

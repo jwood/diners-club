@@ -2,10 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 require 'outing_controller'
 require 'app_config'
 
-# Re-raise errors caught by the controller.
-class OutingController; def rescue_action(e) raise e end; end
-
-class OutingControllerTest < Test::Unit::TestCase
+class OutingControllerTest < ActionController::TestCase
   fixtures :outings, :diners
 
   def setup
@@ -70,7 +67,7 @@ class OutingControllerTest < Test::Unit::TestCase
   
   def test_send_new_outing_email
     post :send_new_outing_email, :id => outings(:bobs_beef_shack)
-    assert_redirected_to :action => 'show'
+    assert_redirected_to :action => 'show', :id => outings(:bobs_beef_shack)
   end
   
   def test_edit_get_form_for_new_outing
@@ -99,7 +96,7 @@ class OutingControllerTest < Test::Unit::TestCase
     outing = outings(:bobs_beef_shack)
     outing.restaurant_city = 'New York'
     post :edit, { :id => outing.id, :outing => outing.attributes }
-    assert_redirected_to :action => 'show'
+    assert_redirected_to :action => 'show', :id => outing
 
     get :edit, :id => outing.id
     assert_response :success

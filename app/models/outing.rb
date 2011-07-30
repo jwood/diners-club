@@ -9,9 +9,6 @@ class Outing < ActiveRecord::Base
     :restaurant_address_line_1, :restaurant_city, :restaurant_state, :restaurant_zip,
     :restaurant_description
 
-  #-----------------------------------------------------------------------------
-  # Get the location of the afterparty, or nil if there is no afterparty
-  #-----------------------------------------------------------------------------
   def afterparty_location
     location = nil
     
@@ -33,9 +30,6 @@ class Outing < ActiveRecord::Base
     location
   end
   
-  #-----------------------------------------------------------------------------
-  # Get the list of diners who have not responded to this outing
-  #-----------------------------------------------------------------------------
   def unresponsive_diners
     unres_diners = Diner.find(:all)
     diners.each { |diner| unres_diners.delete(diner) } unless diners.blank?
@@ -43,10 +37,6 @@ class Outing < ActiveRecord::Base
     unres_diners
   end
   
-  #-----------------------------------------------------------------------------
-  # Override the default save method, stripping "http://" from the website
-  # if it is included.  Then, call the default save method.
-  #-----------------------------------------------------------------------------
   def save
     self.restaurant_website.gsub!('http://', '') unless self.restaurant_website.nil?
 
@@ -63,9 +53,6 @@ class Outing < ActiveRecord::Base
     super
   end
 
-  #-----------------------------------------------------------------------------
-  # Perform additional validations before saving
-  #-----------------------------------------------------------------------------
   def validate
     # Make sure that we only allow one sponsored outing per month
     unless diner.nil?
@@ -88,26 +75,17 @@ class Outing < ActiveRecord::Base
     end
   end
 
-  #-----------------------------------------------------------------------------
-  # Returns the full address of the restaurant
-  #-----------------------------------------------------------------------------
   def restaurant_address
     get_pretty_address(restaurant_address_line_1, restaurant_address_line_2, 
         restaurant_city, restaurant_state, restaurant_zip)
   end
 
-  #-----------------------------------------------------------------------------
-  # Returns the full address of the afterparty
-  #-----------------------------------------------------------------------------
   def afterparty_address
     location = afterparty_location || {}
     get_pretty_address(location[:address], nil, location[:city], 
         location[:state], location[:zip])
   end
 
-  #-----------------------------------------------------------------------------
-  # Returns a string explaining what is different between the two Outings
-  #-----------------------------------------------------------------------------
   def Outing.diff(new_outing, old_outing, old_in_diners, old_out_diners, 
       old_unresponsive_diners, old_afterparty_location)
 
@@ -153,36 +131,25 @@ class Outing < ActiveRecord::Base
     diff_text
   end
 
-  #-----------------------------------------------------------------------------
-  # Find all outings that have not taken place yet
-  #-----------------------------------------------------------------------------
   def Outing.find_upcoming_outings
     Outing.find(:all, 
       :conditions => ['reservation_time >= ? and diner_id is not null', Time.now],
       :order => 'reservation_time ASC')
   end
   
-  #-----------------------------------------------------------------------------
-  # Find all outings that have already taken place
-  #-----------------------------------------------------------------------------
   def Outing.find_past_outings
     Outing.find(:all, 
       :conditions => ['reservation_time < ? and diner_id is not null', Time.now],
       :order => 'reservation_time DESC')
   end
   
-  #-----------------------------------------------------------------------------
-  # Find all outings that have been suggested (no sponsor)
-  #-----------------------------------------------------------------------------
   def Outing.find_suggested_outings
     Outing.find(:all,
       :conditions => 'diner_id is null', 
       :order => 'reservation_time ASC')
   end
   
-  ##############################################################################
   private
-  ##############################################################################
 
   def Outing.diff_diner_list(old_list, new_list)
     diner_names = ""
@@ -194,9 +161,6 @@ class Outing < ActiveRecord::Base
     diner_names
   end
   
-  #-----------------------------------------------------------------------------
-  # Returns a pretty printable representation of an address
-  #-----------------------------------------------------------------------------
   def get_pretty_address(line_1, line_2, city, state, zip)
     address = ""
     address << "#{line_1}\n" unless line_1.blank?

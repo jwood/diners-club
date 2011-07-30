@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class OutingTest < Test::Unit::TestCase
+class OutingTest < ActiveSupport::TestCase
   fixtures :outings, :diners
 
   def setup

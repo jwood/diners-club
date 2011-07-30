@@ -1,8 +1,5 @@
 module OutingHelper
 
-  #-----------------------------------------------------------------------------
-  # Generate an outings table with the following outings
-  #-----------------------------------------------------------------------------
   def generate_outings_table(outings, suggested = false)
     html =  "<div class=\"outing_table\">\n"
     html += "<table>\n"
@@ -32,9 +29,6 @@ module OutingHelper
     html += "</div>\n"
   end
 
-  #-----------------------------------------------------------------------------
-  # Generate the drop down and links needed to get directions for a diner
-  #-----------------------------------------------------------------------------
   def generate_diner_directions_section(outing, diners)
     url = url_for :action => :get_directions_to_restaurant, :id => outing
 
@@ -47,18 +41,12 @@ module OutingHelper
       :onchange => "updateDinerDirectionsLink('#{url}');"
   end
   
-  #-----------------------------------------------------------------------------
-  # Generate a drop down list containing potential outing sponsors
-  #-----------------------------------------------------------------------------
   def generate_sponsor_dropdown(diners)
     select('outing', 'diner_id',
       diners.collect {|d| [ "#{d.comma_seperated_display_name}", d.id ]}, 
       { :include_blank => true })
   end
   
-  #-----------------------------------------------------------------------------
-  # Generate a drop down list containing potential afterparty sponsors
-  #-----------------------------------------------------------------------------
   def generate_afterparty_sponsor_dropdown(afterparty_sponsor, diners)
     options = ""
     for diner in diners 
@@ -71,25 +59,16 @@ module OutingHelper
     select_tag('afterparty_sponsor_name', options)
   end
   
-  #-----------------------------------------------------------------------------
-  # Generate the drop down boxes to select an outing date and time
-  #-----------------------------------------------------------------------------
   def generate_reservation_time_select(outing)
     my_select_time = outing.reservation_time || Time.now
     select_month(my_select_time) + ' ' + select_year(my_select_time) + ' - ' + 
       select_time(my_select_time, { :time_separator => ': ' } )
   end
   
-  #-----------------------------------------------------------------------------
-  # Linkify the specified link
-  #-----------------------------------------------------------------------------
   def linkify(link)
     "<a href=\"http://#{link}\" target=\"new\">http://#{link}</a>"
   end
 
-  #-----------------------------------------------------------------------------
-  # Generate the unordered list of diners for an outing
-  #-----------------------------------------------------------------------------
   def generate_diners_list(diners)
     html = "<ul>"
     diners.sort! { |x,y| "#{x.last_name}#{x.first_name}" <=> "#{y.last_name}#{y.first_name}" }
@@ -100,9 +79,6 @@ module OutingHelper
     html
   end
 
-  #-----------------------------------------------------------------------------
-  # Generate checkboxes for Diners
-  #-----------------------------------------------------------------------------
   def generate_diner_checkboxes(diners, attending_diners, declined_diners)
     html = "<p><strong>Who's In?</strong>\n"
     html += create_tooltip("attendee_header", "Select the check boxes to indicate who's coming") + "</p>\n"
@@ -130,10 +106,6 @@ module OutingHelper
     html
   end
 
-  #-----------------------------------------------------------------------------
-  # Displays the afterparty address (either the afterparty sponsor's address or
-  # the bar's address)
-  #-----------------------------------------------------------------------------
   def display_afterparty_address(outing)
     bar_name = ''
     if (!outing.afterparty_sponsor.blank?)
@@ -149,14 +121,8 @@ module OutingHelper
     html += h(location[:city]) + ', ' + h(location[:state]) + ' ' + h(location[:zip]) + '<br />'
   end
 
-  ##############################################################################
   private
-  ##############################################################################
   
-  #-----------------------------------------------------------------------------
-  # Generate a dropdown box of diner names to be used for specifying who to
-  # generate a map for
-  #-----------------------------------------------------------------------------
   def generate_diner_options(diners)
     option_tags = ''
     for diner in diners

@@ -2,18 +2,12 @@ require 'app_config'
 
 class OutingController < ApplicationController
 
-  #----------------------------------------------------------------------------#
-  # Get a list of the outings
-  #----------------------------------------------------------------------------#
   def index
     @upcoming_outings = Outing.find_upcoming_outings
     @past_outings = Outing.find_past_outings
     @suggested_outings = Outing.find_suggested_outings
   end
   
-  #----------------------------------------------------------------------------#
-  # Create a new outing or edit an existing one
-  #----------------------------------------------------------------------------#
   def edit
     @diners = Diner.find_all_in_order
     
@@ -52,32 +46,17 @@ class OutingController < ApplicationController
     end
   end
 
-  #----------------------------------------------------------------------------#
-  # Show an outing's details
-  #----------------------------------------------------------------------------#
   def show
     @outing = Outing.find(params[:id])
-    
-    # This is used for getting directions, so only select the Diners that have
-    # addresses.
     @diners = Diner.find_all_in_order_with_address
   end
 
-  #----------------------------------------------------------------------------#
-  # Get a map of the restaurant's location
-  #----------------------------------------------------------------------------#
   def get_map_to_restaurant
     outing = Outing.find(params[:id])
     redirect_to generate_map_link(outing.restaurant_address_line_1, 
       outing.restaurant_city, outing.restaurant_state, outing.restaurant_zip)
   end
   
-  #----------------------------------------------------------------------------#
-  # Get directions to an outing from a Diner's address
-  # 
-  # Note: Will not work if 2 diners have the same first and last name, but
-  # different addresses.
-  #----------------------------------------------------------------------------#
   def get_directions_to_restaurant
     outing = Outing.find(params[:id])
     diner = Diner.find_by_first_and_last_name(params[:diner_name])
@@ -86,9 +65,6 @@ class OutingController < ApplicationController
       outing.restaurant_zip)
   end
   
-  #----------------------------------------------------------------------------#
-  # Get a map of the afterparty's location
-  #----------------------------------------------------------------------------#
   def get_map_to_afterparty
     outing = Outing.find(params[:id])
     location = outing.afterparty_location
@@ -96,9 +72,6 @@ class OutingController < ApplicationController
       location[:state], location[:zip])
   end
   
-  #----------------------------------------------------------------------------#
-  # Get directions from the restaurant to the afterparty
-  #----------------------------------------------------------------------------#
   def get_directions_to_afterparty
     outing = Outing.find(params[:id])
     location = outing.afterparty_location
@@ -107,12 +80,6 @@ class OutingController < ApplicationController
       location[:city], location[:state], location[:zip])
   end
 
-  #----------------------------------------------------------------------------#
-  # Send the "new outing" email to the list of diners to announce the outing
-  # 
-  # Using "post" to prevent things like Google's Web Accelerator from following
-  # the "Send outing announcement email" link and triggering the email.
-  #----------------------------------------------------------------------------#
   def send_new_outing_email
     outing = Outing.find(params[:id])
     if request.post? && outing.reservation_time >= Time.now
@@ -123,20 +90,12 @@ class OutingController < ApplicationController
     redirect_to :action => 'show', :id => outing
   end
   
-  #----------------------------------------------------------------------------#
-  # Display the application feedback page
-  #----------------------------------------------------------------------------#
   def feedback
     @admin_email = AppConfig.instance.admin_email 
   end
   
-  ##############################################################################
   private
-  ##############################################################################
 
-  #----------------------------------------------------------------------------#
-  # Get the reservation date/time of the outing
-  #----------------------------------------------------------------------------#
   def get_reservation_time(params)
     year, month, hour, minute = 0
 
@@ -158,23 +117,14 @@ class OutingController < ApplicationController
     time
   end  
     
-  #----------------------------------------------------------------------------#
-  # Get the list of diners that are attending an outing
-  #----------------------------------------------------------------------------#
   def get_attendees(params)
     get_diners(params, 'attending_')
   end
 
-  #----------------------------------------------------------------------------#
-  # Get the list of diners that have declined this outing
-  #----------------------------------------------------------------------------#
   def get_declined_diners(params)
     get_diners(params, 'declined_')
   end
   
-  #----------------------------------------------------------------------------#
-  # Get the list of diners for the specified parameter prefix
-  #----------------------------------------------------------------------------#
   def get_diners(params, param_prefix)
     diners = []
     for param in params
@@ -185,9 +135,6 @@ class OutingController < ApplicationController
     diners
   end
   
-  #----------------------------------------------------------------------------#
-  # Populate the afterparty address information
-  #----------------------------------------------------------------------------#
   def populate_afterparty_info(outing, params)
     if (params['afterparty'] == 'diners_house')
       outing.afterparty_bar_name = ''
@@ -216,18 +163,12 @@ class OutingController < ApplicationController
     outing
   end
   
-  #-----------------------------------------------------------------------------
-  # Generate a map link to the specified location
-  #-----------------------------------------------------------------------------
   def generate_map_link(address, city, state, zip)
     query = address + ',' + city + ',' + state + ' ' + zip
     query.gsub!(' ', '+')
     'http://maps.google.com/maps?q=' + query
   end
 
-  #-----------------------------------------------------------------------------
-  # Generate directions from the source to the destination
-  #-----------------------------------------------------------------------------
   def generate_directions_link(s_address, s_city, s_state, s_zip,
       d_address, d_city, d_state, d_zip)
     query = 'daddr=' + d_address + ',' + d_city + ',' + d_state + ' ' + d_zip
