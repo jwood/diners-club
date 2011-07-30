@@ -46,6 +46,7 @@ Rails::Initializer.run do |config|
   # See Rails::Configuration for more options
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
+    :enable_starttls_auto => AppConfig.instance.smtp_settings[:enable_starttls_auto],
     :address => AppConfig.instance.smtp_settings[:address],
     :port => AppConfig.instance.smtp_settings[:port], 
     :domain => AppConfig.instance.smtp_settings[:domain],
